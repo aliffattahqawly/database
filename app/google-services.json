@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "42243334152",
+    "project_id": "loginsignupfrd-ea04f",
+    "storage_bucket": "loginsignupfrd-ea04f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42243334152:android:ad69021bcc6381b52df1bd",
+        "android_client_info": {
+          "package_name": "com.example.loginsignupfrd"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGx81mBPE-NYF7XJBa6woouz58_ViGhBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
