@@ -37,8 +37,13 @@ class LoginActivity : AppCompatActivity() {
             val loginPassword = binding.loginPassword.text.toString()
 
             if (loginUsername.isNotEmpty()&& loginPassword.isNotEmpty()){
-                loginUser(loginUsername,loginPassword)
-            }else{
+                if (loginUsername.length < 8 || loginPassword.length < 8 ){
+                    Toast.makeText(this@LoginActivity, "Username and Password must be at least 8 characters", Toast.LENGTH_SHORT).show()
+                }else{
+                    loginUser(loginUsername,loginPassword)
+                }
+            }
+            else{
                 Toast.makeText(this@LoginActivity, "All field are mandatory", Toast.LENGTH_SHORT).show()
 
             }
@@ -62,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
                         val userData = userSnapshot.getValue(UserData::class.java)
 
                         if (userData != null && userData.password == password) {
+                            val hiddenPassword = password.replaceRange(0, password.length, "*".repeat(password.length))
                             Toast.makeText(this@LoginActivity, "Login succesful ", Toast.LENGTH_SHORT).show()
                             startActivity(Intent(this@LoginActivity,MainActivity::class.java ))
                             finish()
