@@ -20,7 +20,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -31,60 +30,48 @@ class LoginActivity : AppCompatActivity() {
         firebaseDatabase = FirebaseDatabase.getInstance()
         databaseReference = firebaseDatabase.reference.child("users")
 
-        binding.loginButton.setOnClickListener{
+        binding.loginButton.setOnClickListener {
             val loginUsername = binding.loginUsername.text.toString()
             val loginPassword = binding.loginPassword.text.toString()
 
-            if (loginUsername.isNotEmpty()&& loginPassword.isNotEmpty()){
-                if (loginUsername.length < 8 || loginPassword.length < 8 ){
+            if (loginUsername.isNotEmpty() && loginPassword.isNotEmpty()) {
+                if (loginUsername.length < 8 || loginPassword.length < 8) {
                     Toast.makeText(this@LoginActivity, "Username and Password must be at least 8 characters", Toast.LENGTH_SHORT).show()
-                }else{
-                    loginUser(loginUsername,loginPassword)
+                } else {
+                    loginUser(loginUsername, loginPassword)
                 }
+            } else {
+                Toast.makeText(this@LoginActivity, "All fields are mandatory", Toast.LENGTH_SHORT).show()
             }
-            else{
-                Toast.makeText(this@LoginActivity, "All field are mandatory", Toast.LENGTH_SHORT).show()
-
-            }
-
-
-        }
-            binding.signupRedirect.setOnClickListener{
-                startActivity(Intent(this@LoginActivity, SignupActivity::class.java ))
-                finish()
-
-            }
-
-
         }
 
-    private fun loginUser(username:String, password:String){
+        binding.signupRedirect.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
+            finish()
+        }
+    }
+
+    private fun loginUser(username: String, password: String) {
         databaseReference.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot:DataSnapshot ) {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (userSnapshot in dataSnapshot.children) {
                         val userData = userSnapshot.getValue(UserData::class.java)
 
                         if (userData != null && userData.password == password) {
-                            val hiddenPassword = password.replaceRange(0, password.length, "*".repeat(password.length))
-                            Toast.makeText(this@LoginActivity, "Login succesful ", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this@LoginActivity, MainActivity::class.java ))
+                            Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                             finish()
                             return
-
-
                         }
                     }
                 }
-                Toast.makeText(this@LoginActivity, "Login failed ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, "Login failed", Toast.LENGTH_SHORT).show()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Toast.makeText(this@LoginActivity, "Database error :${databaseError.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, "Database error: ${databaseError.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
-
-
-    }
-
+}
