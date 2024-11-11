@@ -1,4 +1,4 @@
-package com.example.loginsignupfrd
+package com.example.loginsignupfrd.model
 
 data class UserData(
     val id: String? =null,

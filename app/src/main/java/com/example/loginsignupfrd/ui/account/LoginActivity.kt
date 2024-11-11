@@ -1,14 +1,13 @@
-package com.example.loginsignupfrd
+package com.example.loginsignupfrd.ui.account
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.loginsignupfrd.MainActivity
 import com.example.loginsignupfrd.databinding.ActivityLoginBinding
-import com.example.loginsignupfrd.databinding.ActivitySignupBinding
+import com.example.loginsignupfrd.model.UserData
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -51,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
 
         }
             binding.signupRedirect.setOnClickListener{
-                startActivity(Intent(this@LoginActivity,SignupActivity::class.java ))
+                startActivity(Intent(this@LoginActivity, SignupActivity::class.java ))
                 finish()
 
             }
@@ -69,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
                         if (userData != null && userData.password == password) {
                             val hiddenPassword = password.replaceRange(0, password.length, "*".repeat(password.length))
                             Toast.makeText(this@LoginActivity, "Login succesful ", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this@LoginActivity,MainActivity::class.java ))
+                            startActivity(Intent(this@LoginActivity, MainActivity::class.java ))
                             finish()
                             return
 
