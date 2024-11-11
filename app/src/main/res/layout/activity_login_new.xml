@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:gravity="center_horizontal"
+    android:background="@drawable/background_main"
+    >
+
+    <!-- Skillshare Logo -->
+    <TextView
+        android:id="@+id/loginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="16pt"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp" />
+
+    <ImageView
+        android:id="@+id/LogoImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logoskillshare"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Email or Phone Number -->
+    <EditText
+        android:id="@+id/emailOrPhoneEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email or Phone Number"
+        android:padding="8dp"
+        android:background="@drawable/edittext_border_search"
+        android:inputType="textEmailAddress|phone"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Full Name -->
+    <EditText
+        android:id="@+id/fullNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Full Name"
+        android:padding="8dp"
+        android:background="@drawable/edittext_border_search"
+        android:inputType="textPersonName"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Username -->
+    <EditText
+        android:id="@+id/usernameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:padding="8dp"
+        android:background="@drawable/edittext_border_search"
+        android:inputType="text"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Password -->
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:padding="8dp"
+        android:background="@drawable/edittext_border_search"
+        android:inputType="textPassword"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Sign Up Button -->
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:backgroundTint="@color/blueDark"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Log In Link -->
+    <TextView
+        android:id="@+id/loginTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Have an account? Log In"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="148dp"/>
+
+    <!-- Permission Message -->
+    <TextView
+        android:id="@+id/permissionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="We need permission for the service you use"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Learn More Link -->
+    <TextView
+        android:id="@+id/learnMoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Learn More"
+        android:textColor="@android:color/white"/>
+
+</LinearLayout>

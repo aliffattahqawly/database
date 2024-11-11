@@ -65,8 +65,10 @@ class LoginActivity : AppCompatActivity() {
                             return
                         }
                     }
+                    Toast.makeText(this@LoginActivity, "Invalid username or password", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@LoginActivity, "User not found", Toast.LENGTH_SHORT).show()
                 }
-                Toast.makeText(this@LoginActivity, "Login failed", Toast.LENGTH_SHORT).show()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
