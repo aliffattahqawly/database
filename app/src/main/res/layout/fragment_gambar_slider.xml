@@ -2,14 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/viewPager"
         android:layout_margin="8dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="2dp"
         android:layout_width="match_parent"
-        android:layout_height="210dp" />
+        android:layout_height="210dp">
 
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/image_Slider"
@@ -19,12 +21,8 @@
             app:iss_delay="1000"
             app:iss_period="1000"
             app:iss_text_align="CENTER" />
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="8dp" />
 
+    </androidx.cardview.widget.CardView>
     <!-- Berita Terbaru Section -->
     <TextView
         android:id="@+id/tvBerita"
