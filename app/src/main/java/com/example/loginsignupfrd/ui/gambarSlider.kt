@@ -15,7 +15,6 @@ import com.google.firebase.database.ValueEventListener
 
 class gambarSlider : AppCompatActivity() {
 
-
     private lateinit var imageSlider: ImageSlider
 
     @SuppressLint("MissingInflatedId")
@@ -46,7 +45,6 @@ class gambarSlider : AppCompatActivity() {
                     // Handle possible errors here
                 }
             })
-
 
     }
 }
