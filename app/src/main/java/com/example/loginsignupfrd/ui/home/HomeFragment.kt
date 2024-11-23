@@ -18,13 +18,6 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter: CardAdapter
-    private val classList = listOf(
-        Item("Item 1", "All"),
-        Item("Item 2", "Popular"),
-        Item("Item 3", "Nearby"),
-        Item("Item 4", "Popular"),
-        Item("Item 5", "Nearby")
-    ) // Contoh data
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +34,6 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         // Inisialisasi Adapter
-        adapter = CardAdapter(classList)
         recyclerView.adapter = adapter
 
         // Inisialisasi Filter
@@ -67,12 +59,12 @@ class HomeFragment : Fragment() {
                 }
 
                 val filteredList = if (category == null) {
-                    classList
+
                 } else {
-                    classList.filter { it.category == category }
+
                 }
 
-                adapter.updateList(filteredList)
+
             }
         }
 
