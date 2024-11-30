@@ -5,74 +5,81 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.denzcoskun.imageslider.ImageSlider
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.example.loginsignupfrd.R
-import com.example.loginsignupfrd.databinding.FragmentHomeBinding
 import com.example.loginsignupfrd.model.Item
+import com.google.firebase.database.*
 
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
-
-    private lateinit var adapter: CardAdapter
+    private lateinit var imageSlider: ImageSlider
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var cardAdapter: CardAdapter
+    private lateinit var items: MutableList<Item>
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+    ): View? {
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        // Image Slider
+        imageSlider = view.findViewById(R.id.image_Slider)
+        val imageList: MutableList<SlideModel> = ArrayList()
 
-        // Inisialisasi RecyclerView
-        val recyclerView: RecyclerView = binding.cardRecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
-        // Inisialisasi Adapter
-        recyclerView.adapter = adapter
-
-        // Inisialisasi Filter
-        val filterAll = binding.filterAll
-        val filterPopular = binding.filterPopular
-        val filterNearby = binding.filterNearby
-
-        val categoryPills = listOf(filterAll, filterPopular, filterNearby)
-
-        // Set default selected to "All"
-        filterAll.isSelected = true
-
-        categoryPills.forEach { pill ->
-            pill.setOnClickListener {
-                categoryPills.forEach { it.isSelected = false }
-                pill.isSelected = true
-
-                val category = when (pill.id) {
-                    R.id.filter_all -> null
-                    R.id.filter_popular -> "Popular"
-                    R.id.filter_nearby -> "Nearby"
-                    else -> null
+        FirebaseDatabase.getInstance().reference.child("imageSlider")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (data in snapshot.children) {
+                        imageList.add(
+                            SlideModel(
+                                data.child("url").value.toString(),
+                                data.child("title").value.toString(),
+                                ScaleTypes.FIT
+                            )
+                        )
+                    }
+                    imageSlider.setImageList(imageList, ScaleTypes.FIT)
                 }
 
-                val filteredList = if (category == null) {
-
-                } else {
-
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle possible errors here
                 }
+            })
+
+        // Card View
+        recyclerView = view.findViewById(R.id.card_recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(context) // Pastikan LayoutManager sudah diatur
+        items = mutableListOf()
+        cardAdapter = CardAdapter(items)
+        recyclerView.adapter = cardAdapter
 
 
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.reference.child("data")
+
+
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                items.clear() // Bersihkan list sebelum menambahkan data baru
+                for (dataSnapshot in snapshot.children) {
+                    val data = dataSnapshot.getValue(Item::class.java)
+                    data?.let { items.add(it) }
+                }
+                cardAdapter.notifyDataSetChanged()
             }
-        }
 
-        return root
-    }
+            override fun onCancelled(error: DatabaseError) {
+                error("doesn't exist view")
+            }
+        })
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+
+        return view
     }
 }

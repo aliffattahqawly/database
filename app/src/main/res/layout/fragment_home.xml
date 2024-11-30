@@ -1,80 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
 
-    <!-- Search Bar -->
-    <EditText
-        android:id="@+id/search_bar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Search..."
-        android:padding="8dp"
-        android:background="@drawable/edittext_border_search"
-        android:textColor="#000000"
-        android:textColorHint="#808080"
-        android:drawableLeft="@android:drawable/ic_menu_search"
-        android:drawablePadding="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-    />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/viewPager"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="210dp">
 
-    <!-- Filter -->
-    <LinearLayout
-        android:id="@+id/filter_group"
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/image_Slider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:iss_auto_cycle="true"
+            app:iss_delay="1000"
+            app:iss_period="1000"
+            app:iss_text_align="CENTER" />
+
+    </androidx.cardview.widget.CardView>
+    <!-- Berita Terbaru Section -->
+    <TextView
+        android:id="@+id/tvBerita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/viewPager"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:text="Berita Terbaru"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium" />
+
+    <!-- Tab Menu -->
+    <LinearLayout
+        android:id="@+id/tabMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvBerita"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/search_bar"
-        app:layout_constraintStart_toStartOf="parent">
+        android:weightSum="3">
 
-        <TextView
-            android:id="@+id/filter_all"
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="All Skills"
-            android:textColor="@color/white"
-            android:padding="12sp"
-            android:background="@drawable/rounded_button_selector"
-            android:layout_marginEnd="8dp" />
+            android:layout_weight="1"
+            android:text="Materi Baru"
+            android:backgroundTint="@color/green"
+            android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/filter_popular"
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="Popular"
-            android:textColor="@color/white"
-            android:background="@drawable/rounded_button_selector"
-            android:padding="12sp"
-            android:layout_marginEnd="8dp" />
+            android:layout_weight="1"
+            android:backgroundTint="@color/green"
+            android:text="Materi Populer"
+            android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/filter_nearby"
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="Nearby"
-            android:background="@drawable/rounded_button_selector"
-            android:textColor="@color/white"
-            android:padding="12sp" />
+            android:layout_weight="1"
+            android:text="Lainnya"
+            android:backgroundTint="@color/green"
+            android:textColor="@color/white" />
     </LinearLayout>
-
     <!-- CardView Container -->
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="16dp"
         android:id="@+id/card_recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/filter_group"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabMenu"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</RelativeLayout>

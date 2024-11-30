@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 
 class HistoryViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is gallery Fragment"
+    private val _historyList = MutableLiveData<List<String>>().apply {
+        value = listOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 5")
     }
-    val text: LiveData<String> = _text
+    val historyList: LiveData<List<String>> = _historyList
 }
