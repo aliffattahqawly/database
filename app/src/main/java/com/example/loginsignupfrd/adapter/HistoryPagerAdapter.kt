@@ -3,6 +3,7 @@ package com.example.loginsignupfrd.ui.history
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.loginsignupfrd.ui.favorite.FavoriteFragment
 
 class HistoryPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 

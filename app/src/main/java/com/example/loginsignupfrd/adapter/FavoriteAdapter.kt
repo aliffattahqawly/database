@@ -1,4 +1,4 @@
-package com.example.loginsignupfrd.ui.history
+package com.example.loginsignupfrd.ui.favorite
 
 import android.view.LayoutInflater
 import android.view.View

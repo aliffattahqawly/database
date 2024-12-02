@@ -9,22 +9,28 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.media3.common.MediaItem
-import com.example.loginsignupfrd.R
-import androidx.media3.exoplayer.*
+import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
-
+import com.example.loginsignupfrd.R
+import com.example.loginsignupfrd.model.Item
+import com.example.loginsignupfrd.ui.shared.SharedViewModel
 
 class DetailItemActivity : AppCompatActivity() {
 
     private lateinit var playerView: PlayerView
     private lateinit var btnDownloadFile: Button
+    private lateinit var btnFavorite: Button
     private lateinit var ivPlayVideo: ImageView
     private var player: ExoPlayer? = null
+    private lateinit var sharedViewModel: SharedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_item)
+
+        sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
 
         val title = intent.getStringExtra("title")
         val description = intent.getStringExtra("description")
@@ -35,6 +41,7 @@ class DetailItemActivity : AppCompatActivity() {
         val tvDetailDescription: TextView = findViewById(R.id.tvDetailDescription)
         playerView = findViewById(R.id.playerView)
         btnDownloadFile = findViewById(R.id.btnDownloadFile)
+        btnFavorite = findViewById(R.id.btnFavorite)
         ivPlayVideo = findViewById(R.id.ivPlayVideo)
 
         tvDetailTitle.text = title
@@ -43,6 +50,12 @@ class DetailItemActivity : AppCompatActivity() {
         // Set file download button
         btnDownloadFile.setOnClickListener {
             downloadFile(fileUrl)
+        }
+
+        // Set favorite button
+        btnFavorite.setOnClickListener {
+            val item = Item(title ?: "", description ?: "", videoUrl ?: "", fileUrl ?: "")
+            sharedViewModel.addToFavorite(item)
         }
 
         // Set play video button

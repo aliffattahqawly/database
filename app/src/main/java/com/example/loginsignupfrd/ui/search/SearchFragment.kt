@@ -1,4 +1,4 @@
-package com.example.loginsignupfrd.ui.slideshow
+package com.example.loginsignupfrd.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.loginsignupfrd.databinding.FragmentSlideshowBinding
-import androidx.appcompat.widget.SearchView
+import com.example.loginsignupfrd.databinding.FragmentSearchBinding
 import com.example.loginsignupfrd.R
 import com.example.loginsignupfrd.model.Item
 import com.example.loginsignupfrd.ui.home.CardAdapter
@@ -18,9 +17,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class SlideshowFragment : Fragment() {
+class SearchFragment : Fragment() {
 
-    private var _binding: FragmentSlideshowBinding? = null
+    private var _binding: FragmentSearchBinding? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var cardAdapter: CardAdapter
     private val items: MutableList<Item> = mutableListOf()
@@ -36,7 +35,7 @@ class SlideshowFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentSlideshowBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         // Inisialisasi SearchView
