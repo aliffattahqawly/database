@@ -12,11 +12,13 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.loginsignupfrd.databinding.ActivityMainBinding
+import com.example.loginsignupfrd.model.UserData
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var userData: UserData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,18 +33,26 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null)
                 .setAnchorView(R.id.fab).show()
         }
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_slideshow,R.id.nav_gallery, R.id.nav_profile
+                R.id.nav_home, R.id.nav_slideshow, R.id.nav_gallery, R.id.nav_profile
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        // Retrieve user data from intent
+        userData = intent.getParcelableExtra("userData") ?: UserData()
+
+        // Set default fragment to HomeFragment
+        navController.navigate(R.id.nav_home)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

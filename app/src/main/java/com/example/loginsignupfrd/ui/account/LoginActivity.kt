@@ -36,12 +36,12 @@ class LoginActivity : AppCompatActivity() {
 
             if (loginUsername.isNotEmpty() && loginPassword.isNotEmpty()) {
                 if (loginUsername.length < 8 || loginPassword.length < 8) {
-                    Toast.makeText(this@LoginActivity, "Username and Password must be at least 8 characters", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "Username dan Password harus minimal 8 karakter", Toast.LENGTH_SHORT).show()
                 } else {
                     loginUser(loginUsername, loginPassword)
                 }
             } else {
-                Toast.makeText(this@LoginActivity, "All fields are mandatory", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, "Semua field harus diisi", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -59,15 +59,24 @@ class LoginActivity : AppCompatActivity() {
                         val userData = userSnapshot.getValue(UserData::class.java)
 
                         if (userData != null && userData.password == password) {
-                            Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                            Toast.makeText(this@LoginActivity, "Login berhasil", Toast.LENGTH_SHORT).show()
+
+                            // Simpan ID pengguna ke SharedPreferences
+                            val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                            sharedPreferences.edit().putString("user_id", userData.id).apply()
+
+                            startActivity(
+                                Intent(this@LoginActivity, MainActivity::class.java).apply {
+                                    putExtra("userData", userData)
+                                }
+                            )
                             finish()
                             return
                         }
                     }
-                    Toast.makeText(this@LoginActivity, "Invalid username or password", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "Username atau password salah", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this@LoginActivity, "User not found", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "Pengguna tidak ditemukan", Toast.LENGTH_SHORT).show()
                 }
             }
 
