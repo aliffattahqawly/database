@@ -52,7 +52,6 @@ class CardAdapter(private val items: MutableList<Item>) : RecyclerView.Adapter<C
         private val imageView: ImageView = itemView.findViewById(R.id.item_image)
         private val titleTextView: TextView = itemView.findViewById(R.id.tvTitle)
         private val descriptionTextView: TextView = itemView.findViewById(R.id.tvDescription)
-        private val categoryTextView: TextView = itemView.findViewById(R.id.tvCategory)
 
         fun bind(item: Item) {
             // Set gambar dari URL menggunakan Glide
@@ -64,7 +63,6 @@ class CardAdapter(private val items: MutableList<Item>) : RecyclerView.Adapter<C
             // Set judul dan deskripsi
             titleTextView.text = item.name
             descriptionTextView.text = item.description
-            categoryTextView.text = item.category
 
 
         }
