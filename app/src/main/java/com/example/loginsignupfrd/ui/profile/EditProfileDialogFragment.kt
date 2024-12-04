@@ -68,4 +68,9 @@ class EditProfileDialogFragment : DialogFragment() {
     fun setEditProfileListener(listener: EditProfileListener) {
         this.listener = listener
     }
+
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    }
 }
