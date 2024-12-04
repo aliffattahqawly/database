@@ -40,11 +40,11 @@ class HistoryFragment : Fragment() {
             }
         }.attach()
 
-        // Observe history items
-        sharedViewModel.historyItems.observe(viewLifecycleOwner) { items ->
-            // Update your adapter with the new items
-            // For example, if you have a RecyclerView in HistoryTabFragment, update its adapter here
-        }
+//        // Observe history items
+//        sharedViewModel.historyItems.observe(viewLifecycleOwner) { items ->
+//            // Update your adapter with the new items
+//            // For example, if you have a RecyclerView in HistoryTabFragment, update its adapter here
+//        }
 
         return root
     }

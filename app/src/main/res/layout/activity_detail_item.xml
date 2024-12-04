@@ -20,11 +20,21 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- PlayerView untuk video -->
+            <androidx.media3.ui.PlayerView
+                android:id="@+id/playerView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"/>
+
             <TextView
                 android:id="@+id/tvDetailTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Title"
+                android:paddingTop="16dp"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black" />
@@ -38,27 +48,15 @@
                 android:paddingTop="16dp"
                 android:textColor="@android:color/darker_gray" />
 
-            <!-- PlayerView untuk video -->
-            <androidx.media3.ui.PlayerView
-                android:id="@+id/playerView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_below="@id/tvDetailDescription"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"/>
-
             <!-- ImageView untuk memulai video -->
-            <ImageView
+            <Button
                 android:id="@+id/ivPlayVideo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_play"
-                android:layout_centerInParent="true"
-                android:layout_below="@id/playerView"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"/>
+                android:text="Play"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp" />
 
             <Button
                 android:id="@+id/btnDownloadFile"

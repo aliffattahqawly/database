@@ -22,7 +22,7 @@ class DetailItemActivity : AppCompatActivity() {
     private lateinit var playerView: PlayerView
     private lateinit var btnDownloadFile: Button
     private lateinit var btnFavorite: Button
-    private lateinit var ivPlayVideo: ImageView
+    private lateinit var ivPlayVideo: Button
     private var player: ExoPlayer? = null
     private lateinit var sharedViewModel: SharedViewModel
 
@@ -56,12 +56,13 @@ class DetailItemActivity : AppCompatActivity() {
         btnFavorite.setOnClickListener {
             val item = Item(title ?: "", description ?: "", videoUrl ?: "", fileUrl ?: "")
             sharedViewModel.addToFavorite(item)
+            btnFavorite.isEnabled = false // Disable button after adding to favorites
         }
 
         // Set play video button
         ivPlayVideo.setOnClickListener {
             initializePlayer(videoUrl)
-            ivPlayVideo.visibility = ImageView.GONE // Sembunyikan ImageView setelah video dimulai
+//            ivPlayVideo.visibility = ImageView.GONE // Sembunyikan ImageView setelah video dimulai
         }
     }
 

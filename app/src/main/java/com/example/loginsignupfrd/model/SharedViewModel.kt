@@ -24,7 +24,16 @@ class SharedViewModel : ViewModel() {
     }
 
     fun addToFavorite(item: Item) {
-        _favoriteItems.value?.add(item)
-        _favoriteItems.value = _favoriteItems.value // Trigger LiveData update
+        val currentList = _favoriteItems.value ?: mutableListOf()
+        if (!currentList.contains(item)) {
+            currentList.add(item)
+            _favoriteItems.value = currentList
+        }
+    }
+
+    fun removeFromFavorite(item: Item) {
+        val currentList = _favoriteItems.value ?: mutableListOf()
+        currentList.remove(item)
+        _favoriteItems.value = currentList
     }
 }

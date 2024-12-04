@@ -40,8 +40,6 @@ class CardAdapter(private val items: MutableList<Item>) : RecyclerView.Adapter<C
             // Add item to history
             sharedViewModel.addToHistory(item)
 
-            // Add item to favorite
-            sharedViewModel.addToFavorite(item)
         }
     }
 
